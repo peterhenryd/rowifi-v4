@@ -43,6 +43,5 @@ deadpool-redis = "0"
 futures-util = "0"
 itertools = "0"
 lazy_static = "1"
-patreon = { path = "../patreon" }
 prometheus = "0"
 redis = { version = "0", default-features = false, features = ["aio", "tokio-comp", "connection-manager"] }

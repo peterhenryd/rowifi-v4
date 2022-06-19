@@ -1,5 +1,4 @@
 use dashmap::{DashMap, DashSet};
-use patreon::Client as Patreon;
 use roblox::Client as Roblox;
 use rowifi_cache::{Cache, CachedGuild, CachedMember};
 use rowifi_database::Database;
@@ -72,8 +71,6 @@ pub struct BotContextRef {
     pub database: Database,
     /// The Roblox API Wrapper struct
     pub roblox: Roblox,
-    /// The Patreon API Wrapper struct
-    pub patreon: Patreon,
     /// The module collecting events data. This is an Arc because we distribute this across multiple components
     pub stats: Arc<BotStats>,
 
@@ -124,7 +121,6 @@ impl BotContext {
         standby: Standby,
         database: Database,
         roblox: Roblox,
-        patreon: Patreon,
         stats: Arc<BotStats>,
         webhooks: HashMap<&'static str, &str>,
         cluster_id: u64,
@@ -158,7 +154,6 @@ impl BotContext {
             standby,
             database,
             roblox,
-            patreon,
             stats,
             webhooks: webhooks_map,
             cluster_id,

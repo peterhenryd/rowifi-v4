@@ -1,4 +1,3 @@
-mod patreon;
 mod redeem;
 mod transfer;
 
@@ -8,7 +7,6 @@ use rowifi_models::{
     user::{RoUser, UserFlags},
 };
 
-use self::patreon::premium_patreon;
 use redeem::{premium_redeem, premium_remove};
 use transfer::{premium_transfer, premium_untransfer};
 
@@ -24,12 +22,6 @@ pub fn premium_config(cmds: &mut Vec<Command>) {
         .names(&["remove"])
         .description("Command to disable premium from the server")
         .handler(premium_remove);
-
-    let premium_patreon_cmd = Command::builder()
-        .level(RoLevel::Normal)
-        .names(&["patreon"])
-        .description("Command to link your patreon account to your discord account")
-        .handler(premium_patreon);
 
     let premium_transfer_cmd = Command::builder()
         .level(RoLevel::Normal)
@@ -54,7 +46,6 @@ pub fn premium_config(cmds: &mut Vec<Command>) {
         .names(&["premium"])
         .description("Module to interact with the premium subsystem")
         .group("Premium")
-        .sub_command(premium_patreon_cmd)
         .sub_command(premium_redeem_cmd)
         .sub_command(premium_remove_cmd)
         .sub_command(premium_transfer_cmd)

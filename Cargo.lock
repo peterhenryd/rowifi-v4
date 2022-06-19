@@ -1188,16 +1188,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "patreon"
-version = "0.1.0"
-dependencies = [
- "hyper",
- "hyper-rustls",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "percent-encoding"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1566,7 +1556,6 @@ dependencies = [
  "image",
  "itertools",
  "lazy_static",
- "patreon",
  "plotters",
  "prometheus",
  "rand",
@@ -1619,7 +1608,6 @@ dependencies = [
  "framework-derive",
  "futures-util",
  "itertools",
- "patreon",
  "roblox",
  "rowifi-cache",
  "rowifi-database",

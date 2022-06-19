@@ -1,4 +1,3 @@
-use patreon::PatreonError;
 use roblox::error::Error as RobloxError;
 use rowifi_database::error::{DatabaseError, PostgresError};
 use std::{
@@ -42,7 +41,6 @@ impl Display for RoError {
             ErrorKind::Command => f.write_str("command error: ")?,
             ErrorKind::Database => f.write_str("database error: ")?,
             ErrorKind::Discord => f.write_str("discord error: ")?,
-            ErrorKind::Patreon => f.write_str("patreon error: ")?,
             ErrorKind::Roblox => f.write_str("roblox error: ")?,
         };
         match self.source() {
@@ -65,7 +63,6 @@ pub enum ErrorKind {
     Discord,
     Roblox,
     Database,
-    Patreon,
     Command,
 }
 
@@ -165,15 +162,6 @@ impl From<CommandError> for RoError {
         Self {
             source: Some(Box::new(err)),
             kind: ErrorKind::Command,
-        }
-    }
-}
-
-impl From<PatreonError> for RoError {
-    fn from(err: PatreonError) -> Self {
-        Self {
-            source: Some(Box::new(err)),
-            kind: ErrorKind::Patreon,
         }
     }
 }

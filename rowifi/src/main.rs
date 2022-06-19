@@ -27,7 +27,6 @@ use commands::{
     settings_config, user_config,
 };
 use deadpool_redis::{Manager as RedisManager, Pool as RedisPool, Runtime};
-use patreon::Client as PatreonClient;
 use prometheus::{Encoder, TextEncoder};
 use roblox::Client as RobloxClient;
 use rowifi_cache::Cache;
@@ -100,7 +99,6 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
 
     let token = env::var("DISC_TOKEN").expect("Expected Discord Token in the enviornment");
     let connection_string = env::var("CONN_STRING").unwrap();
-    let patreon_key = env::var("PATREON").expect("Expected a Patreon key in the environment");
     let cluster_id = env::var("CLUSTER_ID")
         .expect("Expected the cluster id in the enviornment")
         .split('-')
@@ -185,7 +183,6 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
 
     let database = Database::new(&connection_string, &primary_key).await;
     let roblox = RobloxClient::new(redis.clone());
-    let patreon = PatreonClient::new(&patreon_key);
 
     let cluster_spawn = cluster.clone();
     tokio::spawn(async move {
@@ -203,7 +200,6 @@ async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
         standby,
         database,
         roblox,
-        patreon,
         stats,
         webhooks,
         cluster_id,
